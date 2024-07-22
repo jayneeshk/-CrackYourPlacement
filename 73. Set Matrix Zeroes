@@ -1,0 +1,80 @@
+class Solution1 {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int row=matrix.size();
+        cout<<row<<endl;
+        int coll=matrix[0].size();
+        cout<<coll<<endl;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<coll;j++){
+                if(matrix[i][j]==0){
+                    make1(i,matrix);
+                    make2(j,matrix);
+                    
+                }
+                cout<<i<<" "<<j<<endl;
+            }
+        }
+
+        for(int i=0;i<row;i++){
+            for(int j=0;j<coll;j++){
+                if(matrix[i][j]==-1){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+    }
+    void make1(int i,vector<vector<int>>& matrix){
+        for(int j=0;j<matrix[0].size();j++){
+            matrix[i][j]=-1;
+        }
+    }
+    void make2(int j,vector<vector<int>>& matrix){
+        for(int i=0;i<matrix.size();i++){
+            matrix[i][j]=-1;
+        }
+    }
+};
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        // vector<int>row(matrix.size(),1);
+        // vector<int>col(matrix[0].size(),1);
+        int row=0;
+        int col=0;
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<matrix[0].size();j++){
+                if(matrix[i][j]==0){
+                    if( i==0 || j==0){
+                        if(i==0)row=1;
+                        if(j==0)col=1;
+                    }
+                    else{
+                        matrix[0][j]=0;
+                        matrix[i][0]=0;
+                    }
+                }
+            }
+        }
+
+        for(int i=1;i<matrix.size();i++){
+            for(int j=1;j<matrix[0].size();j++){
+                if(!matrix[0][j] ||!matrix[i][0]){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        int i=0;
+        int j=0;
+        while(i<matrix.size() && col){
+            matrix[i][j]=0;
+            i++;
+        }
+        i=0;
+        while(j<matrix[0].size() && row){
+            matrix[i][j]=0;
+            j++;
+        }
+    }
+};
